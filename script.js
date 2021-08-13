@@ -3,13 +3,33 @@ function generatePassword() {
   var PWLength = prompt("How many characters?");
   console.log(PWLength)
 
-  var Uppercase = confirm("Do you want to include Uppercase Characters?")
+  var upperCase = confirm("Do you want to include Uppercase Characters?")
+    if (upperCase === true) {
+      return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+    }
 
-  var Lowercase = confirm("Do you want to include Lowercase Characters?")
+  var lowerCase = confirm("Do you want to include Lowercase Characters?")
+  if (lowerCase === true) {
+    return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+  }
 
-  var Numbers = confirm("Do you want to include numbers?")
+  var numbers = confirm("Do you want to include numbers?")
+  if (numbers === true) {
+    return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+  }
 
-  var Symbols = confirm("Do you want to include symbols?")
+  var symbols = confirm("Do you want to include symbols?")
+  if (symbols === true) {
+    const symbols = '!@#$%^&*(),.?';
+    return symbols[Math.floor(Math.random() * symbols.length)]
+  }
+
+  let text ="upperCase, lowerCase, numbers, symbols"
+  for (i=0; i < PWLength; i++) {
+
+  }
+
+  return "generatePassword"
 };
 
 
@@ -27,3 +47,6 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+
+//concat arrays-string js
