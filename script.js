@@ -1,11 +1,11 @@
 // Assignment code here
 function generatePassword() {
-  var PWLength = prompt("How many characters?");
+  var PWLength = (Number(prompt("How many characters?")));
   console.log(PWLength)
 
   var upperCase = confirm("Do you want to include Uppercase Characters?")
     if (upperCase === true) {
-      return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+    return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
     }
 
   var lowerCase = confirm("Do you want to include Lowercase Characters?")
