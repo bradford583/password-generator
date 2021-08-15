@@ -1,38 +1,87 @@
 // Assignment code here
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const numbers ="0123456789";
+const symbols = '!@#$%^&*(),.?';
+
 function generatePassword() {
-  var PWLength = (Number(prompt("How many characters?")));
-  console.log(PWLength)
+  var pwLength = (Number(prompt("How many characters would you like? Please choose a number between 8 and 128.")));
+  if (!pwLength || pwLength < 8 || pwLength >128) {
+    alert("You need to choose a number between 8 & 128!");
+    return generatePassword();
+  }
 
   var upperCase = confirm("Do you want to include Uppercase Characters?")
-    if (upperCase === true) {
-    return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-    }
-
+    
   var lowerCase = confirm("Do you want to include Lowercase Characters?")
-  if (lowerCase === true) {
-    return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-  }
 
   var numbers = confirm("Do you want to include numbers?")
-  if (numbers === true) {
-    return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
-  }
 
   var symbols = confirm("Do you want to include symbols?")
-  if (symbols === true) {
-    const symbols = '!@#$%^&*(),.?';
-    return symbols[Math.floor(Math.random() * symbols.length)]
+
+  if (upperCase === false && lowerCase === false && numbers === false && symbols === false) {
+    alert("Please choose at least one character type!");
+    return generatePassword();
   }
 
-  let text ="upperCase, lowerCase, numbers, symbols"
-  for (i=0; i < PWLength; i++) {
-
+  let text =['upperCase', 'lowerCase', 'numbers', 'symbols']
+ 
+  for (i=0; i < pwLength; i++) {
+    let character = generateCharacter(text, upperCase, lowerCase, numbers, symbols);
+    console.log(character);
   }
-
   return "generatePassword"
-};
+}
 
+function generateCharacter(text, upperCase, lowerCase, numbers, symbols) {
+    var charType = Math.floor(Math.random() * (text.length) );
+   if (charType === 0) {
+    if (upperCase === false) {
+      return generateCharacter(text, upperCase, lowerCase, numbers, symbols);
+    }
+   return generateUppercaseLetter();
+   }
+  
+   if (charType === 1) {
+    if (lowerCase === false){
+      return generateCharacter(text,upperCase, lowerCase, numbers, symbols);
+    }
+   return generateLowercaseLetter();
+   }
 
+   if (charType === 2) {
+    if (numbers === false) {
+      return generateCharacter(text, upperCase, lowerCase, numbers, symbols);
+    }
+   return generateNumber();
+   }
+
+   if (charType === 3) {
+    if (symbols === false){
+      return generateCharacter(text, upperCase, lowerCase, numbers, symbols);
+    }
+   return generateSymbols();
+   }
+}
+
+function generateUppercaseLetter() {
+  let letterPosition = Math.floor(Math.random() * (letters.length));
+  return letters.charAt(letterPosition);
+}
+
+function generateLowercaseLetter() {
+  let letterPosition = Math.floor(Math.random() * (letters.length));
+  return letters.charAt(letterPosition).toLowerCase();
+}
+
+function generateNumber() {
+  let numberPosition = Math.floor(Math.random() * (numbers.length));
+  return numbers.charAt(numberPosition);
+}
+
+function generateSymbols() {
+  let symbolPosition = Math.floor(Math.random() * (symbols.length));
+  return symbols.charAt(symbolPosition);
+}
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
