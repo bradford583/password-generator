@@ -4,6 +4,7 @@ const numbers ="0123456789";
 const symbols = '!@#$%^&*(),.?';
 
 function generatePassword() {
+  var generatedPassword = "";
   var pwLength = (Number(prompt("How many characters would you like? Please choose a number between 8 and 128.")));
   if (!pwLength || pwLength < 8 || pwLength >128) {
     alert("You need to choose a number between 8 & 128!");
@@ -27,13 +28,13 @@ function generatePassword() {
  
   for (i=0; i < pwLength; i++) {
     let character = generateCharacter(text, upperCase, lowerCase, numbers, symbols);
-    console.log(character);
+    generatedPassword = generatedPassword + character;
   }
-  return "generatePassword"
+  return generatedPassword;
 }
 
 function generateCharacter(text, upperCase, lowerCase, numbers, symbols) {
-    var charType = Math.floor(Math.random() * (text.length) );
+  var charType = Math.floor(Math.random() * (text.length) );
    if (charType === 0) {
     if (upperCase === false) {
       return generateCharacter(text, upperCase, lowerCase, numbers, symbols);
@@ -61,6 +62,8 @@ function generateCharacter(text, upperCase, lowerCase, numbers, symbols) {
     }
    return generateSymbols();
    }
+
+   return generatedPassword;
 }
 
 function generateUppercaseLetter() {
